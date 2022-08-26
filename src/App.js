@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Form from './components/form/Form';
 import { useState } from 'react';
+import TaskList from './components/task-list/TaskList';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <Form onSubmit={addTask}></Form>
+      <TaskList tasks={tasks}></TaskList>
     </div>
   );
 }
