@@ -14,27 +14,33 @@ const Form = (props) => {
     // Function
     const handleSubmit = (e) => {
         e.preventDefault()
-        const task = {
-            id: nanoid(),
-            name: name,
-            description: description,
-            priority: priority,
-            done: false
+        if (name.length > 0 && description.length > 0) {
+            const task = {
+                id: nanoid(),
+                name: name,
+                description: description,
+                priority: priority,
+                done: false
+            }
+            onSubmit(task)
         }
-        onSubmit(task)
+        else {
+            window.alert("Veuillez remplir tous les champs")
+        }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Nom</label>
+        <form className="form-container" onSubmit={handleSubmit}>
+            <h1>Ajouter une tâche</h1>
+            <div className="form-field">
+                <label className={name.length < 1 && "red"}>Nom</label>
                 <input type="text" value={name} onChange={e => setName(e.target.value)}></input>
             </div>
-            <div>
-                <label>Description</label>
+            <div className="form-field" >
+                <label className={description.length < 1 && "red"}>Description</label>
                 <textarea value={description} onChange={e => setDescription(e.target.value)}></textarea>
             </div>
-            <div>
+            <div className="form-field">
                 <label>Priorité</label>
                 <select value={priority} onChange={e => setPriority(e.target.value)}>
                     <option value="basse">Basse</option>
@@ -43,7 +49,7 @@ const Form = (props) => {
                 </select>
             </div>
 
-            <input type="submit" />
+            <input class="submit-button" type="submit" />
         </form>
     )
 }

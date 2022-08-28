@@ -13,10 +13,24 @@ function App() {
     setTasks(p => [task, ...p])
   }
 
+  const deleteTask = (id) => {
+    setTasks(p => p.filter(
+      t => t.id !== id
+    ))
+  }
+  
+  const finishTask = (id) => {
+    setTasks(p => p.map(
+      t => t.id === id ? {...t, done: true} : t
+    ))
+  }
+
   return (
     <div className="App">
       <Form onSubmit={addTask}></Form>
-      <TaskList tasks={tasks}></TaskList>
+      <TaskList tasks={tasks}
+        onTaskDelete={deleteTask}
+        onTaskFinish={finishTask}></TaskList>
     </div>
   );
 }
